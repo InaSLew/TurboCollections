@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TurboCollections
 {
@@ -75,10 +76,14 @@ namespace TurboCollections
             RemoveAt(indexToRemove);
         }
         
-        // // adds multiple items to this list at once.
-        // void AddRange(IEnumerable<T> items);
+        // adds multiple items to this list at once.
+        public void AddRange(IEnumerable<T> itemsToAdd)
+        {
+            using var enumerator = itemsToAdd.GetEnumerator();
+            while (enumerator.MoveNext()) Add(enumerator.Current);
+        }
         
-        // // gets the iterator for this collection. Used by IEnumerator to support foreach.
+        // gets the iterator for this collection. Used by IEnumerator to support foreach.
         // IEnumerator<T>.GetEnumerator();
 
         private bool IsIndexOutOfRange(int x) => (Count == 0 || x < 0 || x > Count - 1);

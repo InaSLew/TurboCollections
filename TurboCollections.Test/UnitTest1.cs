@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace TurboCollections.Test
@@ -164,6 +166,33 @@ namespace TurboCollections.Test
             list.Add(50);
 
             Assert.Throws<InvalidOperationException>(delegate { list.Remove(666); });
+        }
+
+        [Test]
+        public void AddRangeMultipleShouldWork()
+        {
+            IEnumerable<int> itemsToAdd = new[] {1, 2, 3};
+            var list = new TurboList<int>();
+            list.Add(3);
+            list.Add(2);
+            list.Add(1);
+            list.AddRange(itemsToAdd);
+            
+            Assert.AreEqual(6, list.Count);
+        }
+        
+        [Test]
+        public void AddRangeSingleShouldWork()
+        {
+            IEnumerable<int> itemsToAdd = new[] {666};
+            var list = new TurboList<int>();
+            list.Add(3);
+            list.Add(2);
+            list.Add(1);
+            list.AddRange(itemsToAdd);
+            
+            Assert.AreEqual(4, list.Count);
+            Assert.IsTrue(list.Contains(666));
         }
     }
 }
