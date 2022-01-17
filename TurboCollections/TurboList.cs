@@ -54,11 +54,26 @@ namespace TurboCollections
             return result;
         }
         
-        // // returns the index of the given item if it is in the list, else -1.
-        // int IndexOf(T item);
-        
-        // // removes the specified item from the list, if it can be found.
-        // void Remove(T item);
+        // returns the index of the given item if it is in the list, else -1.
+        public int IndexOf(T item)
+        {
+            var result = -1;
+            for (var i = 0; i < items.Length; i++)
+            {
+                if (!items[i].Equals(item)) continue;
+                result = i;
+                break;
+            }
+            return result;
+        }
+
+        // removes the specified item from the list, if it can be found.
+        public void Remove(T item)
+        {
+            if (!Contains(item)) throw new InvalidOperationException();
+            var indexToRemove = IndexOf(item);
+            RemoveAt(indexToRemove);
+        }
         
         // // adds multiple items to this list at once.
         // void AddRange(IEnumerable<T> items);

@@ -116,5 +116,54 @@ namespace TurboCollections.Test
             list.Add(6);
             Assert.IsFalse(list.Contains(100));
         }
+
+        [Test]
+        public void IndexOfWithValidItemShouldReturnCorrectIndex()
+        {
+            var list = new TurboList<int>();
+            list.Add(-1);
+            list.Add(500);
+            list.Add(3);
+            list.Add(50);
+            Assert.AreEqual(1, list.IndexOf(500));
+        }
+        
+        [Test]
+        public void IndexOfWithInvalidItemShouldReturnNonMinus1()
+        {
+            var list = new TurboList<int>();
+            list.Add(-1);
+            list.Add(500);
+            list.Add(3);
+            list.Add(50);
+            Assert.AreEqual(-1, list.IndexOf(666));
+        }
+
+        [Test]
+        public void RemoveWithValidItemShouldRemove()
+        {
+            var list = new TurboList<int>();
+            list.Add(-1);
+            list.Add(500);
+            list.Add(3);
+            list.Add(50);
+            
+            list.Remove(3);
+            
+            Assert.AreEqual(3, list.Count); // length of list should one short
+            Assert.IsFalse(list.Contains(3)); // should no longer contain the removed item
+        }
+        
+        [Test]
+        public void RemoveWithInvalidItemShouldThrowException()
+        {
+            var list = new TurboList<int>();
+            list.Add(-1);
+            list.Add(500);
+            list.Add(3);
+            list.Add(50);
+
+            Assert.Throws<InvalidOperationException>(delegate { list.Remove(666); });
+        }
     }
 }
