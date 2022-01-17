@@ -97,5 +97,24 @@ namespace TurboCollections.Test
             list.Add(1);
             Assert.Throws<IndexOutOfRangeException>(delegate { list.RemoveAt(5); });
         }
+
+        [Test]
+        public void ContainShouldReturnTrueWhenFindExist()
+        {
+            var list = new TurboList<int>();
+            list.Add(-1);
+            list.Add(500);
+            list.Add(3);
+            list.Add(50);
+            Assert.IsTrue(list.Contains(3));
+        }
+        
+        [Test]
+        public void ContainShouldReturnFalseWhenFindNotExist()
+        {
+            var list = new TurboList<int>();
+            list.Add(6);
+            Assert.IsFalse(list.Contains(100));
+        }
     }
 }

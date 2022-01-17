@@ -42,8 +42,17 @@ namespace TurboCollections
             items = newItems;
         }
         
-        // // returns true, if the given item can be found in the list, else false.
-        // bool Contains(T item);
+        // returns true, if the given item can be found in the list, else false.
+        public bool Contains(T item)
+        {
+            var result = false;
+            foreach (var t in items)
+            {
+                result = t.Equals(item);
+                if (result) break;
+            }
+            return result;
+        }
         
         // // returns the index of the given item if it is in the list, else -1.
         // int IndexOf(T item);
