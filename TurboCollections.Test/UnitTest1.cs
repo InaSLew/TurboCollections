@@ -2,17 +2,21 @@ using NUnit.Framework;
 
 namespace TurboCollections.Test
 {
-    public class Tests
+    public class TurboListTests
     {
-        [SetUp]
-        public void Setup()
+        [Test]
+        public void NewListIsEmpty()
         {
+            var list = new TurboList<int>();
+            Assert.Zero(list.Count);
         }
 
-        [Test]
-        public void Test1()
-        {
-            Assert.Pass();
-        }
+        // [Test]
+        // public void AddShouldIncreaseCountToOne()
+        // {
+        //     var list = new TurboList<int>();
+        //     list.Add(5);
+        //     Assert.AreEqual(1, list.Count);
+        // }
     }
 }
