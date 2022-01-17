@@ -51,5 +51,51 @@ namespace TurboCollections.Test
             list.Clear();
             Assert.Zero(list.Count); // Actually wanted to use Assert.IsEmpty()
         }
+
+        [Test]
+        public void RemoveAtStartWithValidIndexShouldChangeItemIndex()
+        {
+            var list = new TurboList<int>();
+            list.Add(3);
+            list.Add(2);
+            list.Add(1);
+            list.RemoveAt(0);
+            Assert.AreEqual(list.Get(0), 2);
+            Assert.AreEqual(list.Get(1), 1);
+        }
+        
+        [Test]
+        public void RemoveAtMiddleWithValidIndexShouldChangeItemIndex()
+        {
+            var list = new TurboList<int>();
+            list.Add(3);
+            list.Add(2);
+            list.Add(1);
+            list.RemoveAt(1);
+            Assert.AreEqual(list.Get(0), 3);
+            Assert.AreEqual(list.Get(1), 1);
+        }
+        
+        [Test]
+        public void RemoveAtEndWithValidIndexShouldChangeItemIndex()
+        {
+            var list = new TurboList<int>();
+            list.Add(3);
+            list.Add(2);
+            list.Add(1);
+            list.RemoveAt(2);
+            Assert.AreEqual(list.Get(0), 3);
+            Assert.AreEqual(list.Get(1), 2);
+        }
+
+        [Test]
+        public void RemoveAtWithInvalidIndexShouldChangeItemIndex()
+        {
+            var list = new TurboList<int>();
+            list.Add(3);
+            list.Add(2);
+            list.Add(1);
+            Assert.Throws<IndexOutOfRangeException>(delegate { list.RemoveAt(5); });
+        }
     }
 }

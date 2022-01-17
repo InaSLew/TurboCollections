@@ -20,15 +20,28 @@ namespace TurboCollections
         // gets the item at the specified index. If the index is outside the correct range, an exception is thrown.
         public T Get(int index)
         {
-            if (index < 0 || index > Count - 1) throw new IndexOutOfRangeException();
+            if (IsIndexOutOfRange(index)) throw new IndexOutOfRangeException();
             return items[index];
         }
         
         // removes all items from the list.
         public void Clear() => items = Array.Empty<T>();
 
-        // // removes one item from the list. If the 4th item is removed, then the 5th item becomes the 4th, the 6th becomes the 5th and so on.
-        // void RemoveAt(int index);
+        // removes one item from the list. If the 4th item is removed, then the 5th item becomes the 4th, the 6th becomes the 5th and so on.
+        public void RemoveAt(int index)
+        {
+            if (IsIndexOutOfRange(index)) throw new IndexOutOfRangeException();
+            var newItems = new T[Count - 1];
+            for (var i = 0; i < items.Length; i++)
+            {
+                if (i < index) newItems[i] = items[i];
+                else if (i == index) continue;
+                else newItems[i - 1] = items[i];
+            }
+
+            items = newItems;
+        }
+        
         // // returns true, if the given item can be found in the list, else false.
         // bool Contains(T item);
         
@@ -43,6 +56,8 @@ namespace TurboCollections
         
         // // gets the iterator for this collection. Used by IEnumerator to support foreach.
         // IEnumerator<T>.GetEnumerator();
+
+        private bool IsIndexOutOfRange(int x) => (Count == 0 || x < 0 || x > Count - 1);
         
         public TurboList()
         {
