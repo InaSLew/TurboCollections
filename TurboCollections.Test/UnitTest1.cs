@@ -40,5 +40,16 @@ namespace TurboCollections.Test
             list.Add(1);
             Assert.Throws<IndexOutOfRangeException>(delegate { list.Get(10); });
         }
+
+        [Test]
+        public void ClearShouldEmptyList()
+        {
+            var list = new TurboList<int>();
+            list.Add(1);
+            list.Add(1);
+            list.Add(2);
+            list.Clear();
+            Assert.Zero(list.Count); // Actually wanted to use Assert.IsEmpty()
+        }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 
 namespace TurboCollections
 {
@@ -25,9 +24,9 @@ namespace TurboCollections
             return items[index];
         }
         
-        // // removes all items from the list.
-        // void Clear();
-        
+        // removes all items from the list.
+        public void Clear() => items = Array.Empty<T>();
+
         // // removes one item from the list. If the 4th item is removed, then the 5th item becomes the 4th, the 6th becomes the 5th and so on.
         // void RemoveAt(int index);
         // // returns true, if the given item can be found in the list, else false.
