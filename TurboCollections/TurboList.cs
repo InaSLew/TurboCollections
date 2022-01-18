@@ -44,7 +44,11 @@ namespace TurboCollections
         }
         
         // removes all items from the list.
-        public void Clear() => items = Array.Empty<T>();
+        public void Clear()
+        {
+            Array.Clear(items, 0, Count);
+            lastIndex = 0;
+        }
 
         // removes one item from the list. If the 4th item is removed, then the 5th item becomes the 4th, the 6th becomes the 5th and so on.
         public void RemoveAt(int index)

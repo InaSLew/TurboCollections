@@ -78,7 +78,10 @@ namespace TurboCollections.Test
             list.Add(1);
             list.Add(2);
             list.Clear();
-            Assert.Zero(list.Count); // Actually wanted to use Assert.IsEmpty()
+            Assert.AreEqual(0, list.Get(0));
+            Assert.AreEqual(0, list.Get(1));
+            Assert.AreEqual(0, list.Get(2));
+            Assert.AreEqual(TurboList<int>.BufferSize, list.Count);
         }
 
         [Test]
