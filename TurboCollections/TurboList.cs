@@ -36,6 +36,7 @@ namespace TurboCollections
         public void Clear()
         {
             Array.Clear(items, 0, Count);
+            Count = 0;
         }
 
         // removes one item from the list. If the 4th item is removed, then the 5th item becomes the 4th, the 6th becomes the 5th and so on.
@@ -106,7 +107,7 @@ namespace TurboCollections
             if (count < items.Length) return;
             Array.Resize(ref items, items.Length + BufferSize);
         }
-        private bool IsIndexOutOfRange(int x) => (Count == 0 || x < 0 || x > Length - 1);
+        private bool IsIndexOutOfRange(int x) => (Length == 0 || x < 0 || x > Length - 1);
         
         public TurboList()
         {

@@ -75,19 +75,20 @@ namespace TurboCollections.Test
             Assert.Throws<IndexOutOfRangeException>(() => list.Set(5, 666));
         }
         
-        // [Test]
-        // public void ClearShouldEmptyList()
-        // {
-        //     var list = new TurboList<int>();
-        //     list.Add(1);
-        //     list.Add(1);
-        //     list.Add(2);
-        //     list.Clear();
-        //     Assert.AreEqual(0, list.Get(0));
-        //     Assert.AreEqual(0, list.Get(1));
-        //     Assert.AreEqual(0, list.Get(2));
-        //     Assert.AreEqual(TurboList<int>.BufferSize, list.Count);
-        // }
+        [Test]
+        public void ClearShouldEmptyList()
+        {
+            var list = new TurboList<int>();
+            list.Add(1);
+            list.Add(1);
+            list.Add(2);
+            
+            list.Clear();
+            
+            Assert.AreEqual(0, list.Get(0));
+            Assert.AreEqual(0, list.Get(1));
+            Assert.AreEqual(0, list.Get(2));
+        }
         //
         // [Test]
         // public void RemoveAtStartWithValidIndexShouldChangeItemIndex()
