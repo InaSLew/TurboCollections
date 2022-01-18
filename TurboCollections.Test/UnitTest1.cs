@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
 
@@ -58,7 +57,7 @@ namespace TurboCollections.Test
             var list = new TurboList<int>();
             list.Add(100);
             list.Set(0, 666);
-            Assert.AreEqual(1, list.Count);
+            Assert.AreEqual(TurboList<int>.BufferSize, list.Count);
             Assert.IsFalse(list.Contains(100));
             Assert.IsTrue(list.Contains(666));
         }
@@ -199,14 +198,16 @@ namespace TurboCollections.Test
         [Test]
         public void AddRangeMultipleShouldWork()
         {
-            IEnumerable<int> itemsToAdd = new[] {1, 2, 3};
+            IEnumerable<int> itemsToAdd = new[] {1, 2, 3, 4};
             var list = new TurboList<int>();
             list.Add(3);
             list.Add(2);
             list.Add(1);
             list.AddRange(itemsToAdd);
             
-            Assert.AreEqual(6, list.Count);
+            Assert.AreEqual(TurboList<int>.BufferSize * 2, list.Count);
+            Assert.IsTrue(list.Contains(4));
+            Assert.AreEqual(6, list.IndexOf(4));
         }
         
         [Test]
