@@ -8,18 +8,20 @@ namespace TurboCollections.Test
     public class TurboListTests
     {
         [Test]
-        public void NewListIsEmpty()
+        public void NewListShouldHaveBufferLength()
         {
             var list = new TurboList<int>();
-            Assert.Zero(list.Count);
+            Assert.AreEqual(5, list.Count);
         }
 
         [Test]
-        public void AddShouldIncreaseCountToOne()
+        public void AddToNotFullListShouldWork()
         {
-            var list = new TurboList<int>();
-            list.Add(5);
-            Assert.AreEqual(1, list.Count);
+            var list = new TurboList<int?>();
+            list.Add(100);
+            Assert.AreEqual(5, list.Count);
+            Assert.AreEqual(100, list.Get(0));
+            Assert.IsNull(list.Get(1));
         }
 
         [Test]

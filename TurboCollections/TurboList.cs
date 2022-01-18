@@ -6,7 +6,7 @@ namespace TurboCollections
     public class TurboList<T>
     {
         private T[] items;
-        
+        private readonly int BufferSize = 5;
         // returns the current amount of items contained in the list.
         public int Count => items.Length;
         
@@ -100,7 +100,7 @@ namespace TurboCollections
         public TurboList()
         {
             Console.WriteLine("Hello Turbo!");
-            items = Array.Empty<T>();
+            items = new T[BufferSize];
         }
     }
 }
