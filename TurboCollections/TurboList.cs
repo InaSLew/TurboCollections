@@ -7,28 +7,23 @@ namespace TurboCollections
     {
         private T[] items;
         public static readonly int BufferSize = 4;
-        private static int lastIndex;
         
-        // returns the current amount of items contained in the list.
-        public int Count => items.Length;
-        
+        public int Count { get; private set; }
+        public int Length => items.Length;
+
         // adds one item to the end of the list.
         public void Add(T item)
         {
-            if (items is null)
-            {
-                items = new T[BufferSize];
-                lastIndex = 0;
-                items[lastIndex] = item;
-            }
-            else
-            {
-                lastIndex++;
-                if (IsIndexOutOfRange(lastIndex)) Array.Resize(ref items, Count + BufferSize);
-                items[lastIndex] = item;
-            }
+            EnsureSize(Count + 1);
+            items[Count++] = item;
         }
-        
+
+        private void EnsureSize(int count)
+        {
+            if (count < items.Length) return;
+            Array.Resize(ref items, items.Length + BufferSize);
+        }
+
         // gets the item at the specified index. If the index is outside the correct range, an exception is thrown.
         public T Get(int index)
         {
@@ -47,7 +42,6 @@ namespace TurboCollections
         public void Clear()
         {
             Array.Clear(items, 0, Count);
-            lastIndex = 0;
         }
 
         // removes one item from the list. If the 4th item is removed, then the 5th item becomes the 4th, the 6th becomes the 5th and so on.
@@ -108,12 +102,12 @@ namespace TurboCollections
         // gets the iterator for this collection. Used by IEnumerator to support foreach.
         // IEnumerator<T>.GetEnumerator();
 
-        private bool IsIndexOutOfRange(int x) => (Count == 0 || x < 0 || x > Count - 1);
+        private bool IsIndexOutOfRange(int x) => (Count == 0 || x < 0 || x > items.Length - 1);
         
         public TurboList()
         {
             Console.WriteLine("Hello Turbo!");
-            // items = new T[BufferSize];
+            items = new T[BufferSize];
         }
     }
 }
