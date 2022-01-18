@@ -6,17 +6,27 @@ namespace TurboCollections
     public class TurboList<T>
     {
         private T[] items;
-        private readonly int BufferSize = 5;
+        public static readonly int BufferSize = 4;
+        private static int lastIndex;
+        
         // returns the current amount of items contained in the list.
         public int Count => items.Length;
         
         // adds one item to the end of the list.
         public void Add(T item)
         {
-            // TODO:  Buffer the Array Size instead, not constant resizing.
-            // Need to re-write this using the re-populating method
-            Array.Resize(ref items, Count + 1);
-            items[Count - 1] = item;
+            if (items is null)
+            {
+                items = new T[BufferSize];
+                lastIndex = 0;
+                items[lastIndex] = item;
+            }
+            else
+            {
+                lastIndex++;
+                if (IsIndexOutOfRange(lastIndex)) Array.Resize(ref items, Count + BufferSize);
+                items[lastIndex] = item;
+            }
         }
         
         // gets the item at the specified index. If the index is outside the correct range, an exception is thrown.
@@ -100,7 +110,7 @@ namespace TurboCollections
         public TurboList()
         {
             Console.WriteLine("Hello Turbo!");
-            items = new T[BufferSize];
+            // items = new T[BufferSize];
         }
     }
 }

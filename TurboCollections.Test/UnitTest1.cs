@@ -8,20 +8,27 @@ namespace TurboCollections.Test
     public class TurboListTests
     {
         [Test]
-        public void NewListShouldHaveBufferLength()
-        {
-            var list = new TurboList<int>();
-            Assert.AreEqual(5, list.Count);
-        }
-
-        [Test]
         public void AddToNotFullListShouldWork()
         {
-            var list = new TurboList<int?>();
+            var list = new TurboList<int>();
             list.Add(100);
-            Assert.AreEqual(5, list.Count);
+            Assert.AreEqual(4, list.Count); // 4 is the default buffer size
             Assert.AreEqual(100, list.Get(0));
-            Assert.IsNull(list.Get(1));
+            Assert.Zero(list.Get(1));
+        }
+        
+        [Test]
+        public void AddToFullListShouldDoubleCount()
+        {
+            var list = new TurboList<int>();
+            list.Add(100);
+            list.Add(200);
+            list.Add(300);
+            list.Add(400);
+            Assert.AreEqual(TurboList<int>.BufferSize, list.Count); // 4 is the default buffer size
+            list.Add(500);
+            Assert.AreEqual(TurboList<int>.BufferSize * 2, list.Count);
+            Assert.AreEqual(list.Get(4), 500);
         }
 
         [Test]
