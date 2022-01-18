@@ -37,11 +37,10 @@ namespace TurboCollections
         }
         
         // replaces the item at the specified index. If the index is outside the correct range, an exception is thrown.
-        public T Set(int index, T value)
+        public void Set(int index, T value)
         {
             if (IsIndexOutOfRange(index)) throw new IndexOutOfRangeException();
             items[index] = value;
-            return value;
         }
         
         // removes all items from the list.
