@@ -18,6 +18,11 @@ namespace TurboCollections
             items[Count++] = item;
         }
 
+        /// <summary>
+        /// The method looks ahead and checks for over-indexing;
+        /// it doubles the array size upon detection.
+        /// </summary>
+        /// <param name="count">The next index after the current index</param>
         private void EnsureSize(int count)
         {
             if (count < items.Length) return;
