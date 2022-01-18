@@ -18,17 +18,6 @@ namespace TurboCollections
             items[Count++] = item;
         }
 
-        /// <summary>
-        /// The method looks ahead and checks for over-indexing;
-        /// it doubles the array size upon detection.
-        /// </summary>
-        /// <param name="count">The next index after the current index</param>
-        private void EnsureSize(int count)
-        {
-            if (count < items.Length) return;
-            Array.Resize(ref items, items.Length + BufferSize);
-        }
-
         // gets the item at the specified index. If the index is outside the correct range, an exception is thrown.
         public T Get(int index)
         {
@@ -107,11 +96,20 @@ namespace TurboCollections
         // gets the iterator for this collection. Used by IEnumerator to support foreach.
         // IEnumerator<T>.GetEnumerator();
 
-        private bool IsIndexOutOfRange(int x) => (Count == 0 || x < 0 || x > items.Length - 1);
+        /// <summary>
+        /// The method looks ahead and checks for over-indexing;
+        /// it doubles the array size upon detection.
+        /// </summary>
+        /// <param name="count">The next index after the current index</param>
+        private void EnsureSize(int count)
+        {
+            if (count < items.Length) return;
+            Array.Resize(ref items, items.Length + BufferSize);
+        }
+        private bool IsIndexOutOfRange(int x) => (Count == 0 || x < 0 || x > Length - 1);
         
         public TurboList()
         {
-            Console.WriteLine("Hello Turbo!");
             items = new T[BufferSize];
         }
     }

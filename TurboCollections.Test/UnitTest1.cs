@@ -55,25 +55,26 @@ namespace TurboCollections.Test
             Assert.Throws<IndexOutOfRangeException>(() => list.Get(10));
         }
         
-        // [Test]
-        // public void SetWithValidIndexShouldWork()
-        // {
-        //     var list = new TurboList<int>();
-        //     list.Add(100);
-        //     list.Set(0, 666);
-        //     Assert.AreEqual(TurboList<int>.BufferSize, list.Count);
-        //     Assert.IsFalse(list.Contains(100));
-        //     Assert.IsTrue(list.Contains(666));
-        // }
-        //
-        // [Test]
-        // public void SetWithInvalidIndexShouldWork()
-        // {
-        //     var list = new TurboList<int>();
-        //     list.Add(100);
-        //     Assert.Throws<IndexOutOfRangeException>(delegate { list.Set(5, 666); });
-        // }
-        //
+        [Test]
+        public void SetWithValidIndexShouldWork()
+        {
+            var list = new TurboList<int>();
+            list.Add(100);
+
+            list.Set(0, 666);
+            
+            Assert.IsFalse(list.Contains(100));
+            Assert.IsTrue(list.Contains(666));
+        }
+        
+        [Test]
+        public void SetWithInvalidIndexShouldThrow()
+        {
+            var list = new TurboList<int>();
+            list.Add(100);
+            Assert.Throws<IndexOutOfRangeException>(() => list.Set(5, 666));
+        }
+        
         // [Test]
         // public void ClearShouldEmptyList()
         // {
