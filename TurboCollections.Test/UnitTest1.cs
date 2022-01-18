@@ -10,7 +10,9 @@ namespace TurboCollections.Test
         public void AddToNotFullListCountShouldBeOne()
         {
             var list = new TurboList<int>();
+            
             list.Add(100);
+            
             Assert.AreEqual(1, list.Count);
             Assert.AreEqual(TurboList<int>.BufferSize, list.Length);
         }
@@ -30,27 +32,29 @@ namespace TurboCollections.Test
             Assert.AreEqual(5, list.Count);
         }
 
-        // [Test]
-        // public void GetWithValidIndexShouldReturnItem()
-        // {
-        //     var list = new TurboList<int>();
-        //     list.Add(1);
-        //     list.Add(1);
-        //     list.Add(2);
-        //     list.Add(3);
-        //     list.Add(5);
-        //     var find = list.Get(4);
-        //     Assert.AreEqual(5, find);
-        // }
-        //
-        // [Test]
-        // public void GetWithInvalidIndexShouldThrowException()
-        // {
-        //     var list = new TurboList<int>();
-        //     list.Add(1);
-        //     Assert.Throws<IndexOutOfRangeException>(delegate { list.Get(10); });
-        // }
-        //
+        [Test]
+        public void GetWithValidIndexShouldReturnItem()
+        {
+            var list = new TurboList<int>();
+            list.Add(1);
+            list.Add(1);
+            list.Add(2);
+            list.Add(3);
+            
+            list.Add(5);
+            
+            var find = list.Get(4);
+            Assert.AreEqual(5, find);
+        }
+        
+        [Test]
+        public void GetWithInvalidIndexShouldThrowException()
+        {
+            var list = new TurboList<int>();
+            list.Add(1);
+            Assert.Throws<IndexOutOfRangeException>(() => list.Get(10));
+        }
+        
         // [Test]
         // public void SetWithValidIndexShouldWork()
         // {
