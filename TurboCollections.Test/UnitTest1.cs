@@ -44,6 +44,25 @@ namespace TurboCollections.Test
         }
 
         [Test]
+        public void SetWithValidIndexShouldWork()
+        {
+            var list = new TurboList<int>();
+            list.Add(100);
+            list.Set(0, 666);
+            Assert.AreEqual(1, list.Count);
+            Assert.IsFalse(list.Contains(100));
+            Assert.IsTrue(list.Contains(666));
+        }
+        
+        [Test]
+        public void SetWithInvalidIndexShouldWork()
+        {
+            var list = new TurboList<int>();
+            list.Add(100);
+            Assert.Throws<IndexOutOfRangeException>(delegate { list.Set(5, 666); });
+        }
+
+        [Test]
         public void ClearShouldEmptyList()
         {
             var list = new TurboList<int>();

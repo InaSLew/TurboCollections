@@ -13,6 +13,7 @@ namespace TurboCollections
         // adds one item to the end of the list.
         public void Add(T item)
         {
+            // TODO:  Buffer the Array Size instead, not constant resizing.
             // Need to re-write this using the re-populating method
             Array.Resize(ref items, Count + 1);
             items[Count - 1] = item;
@@ -23,6 +24,14 @@ namespace TurboCollections
         {
             if (IsIndexOutOfRange(index)) throw new IndexOutOfRangeException();
             return items[index];
+        }
+        
+        // replaces the item at the specified index. If the index is outside the correct range, an exception is thrown.
+        public T Set(int index, T value)
+        {
+            if (IsIndexOutOfRange(index)) throw new IndexOutOfRangeException();
+            items[index] = value;
+            return value;
         }
         
         // removes all items from the list.
