@@ -43,15 +43,8 @@ namespace TurboCollections
         public void RemoveAt(int index)
         {
             if (IsIndexOutOfRange(index)) throw new IndexOutOfRangeException();
-            var newItems = new T[Count - 1];
-            for (var i = 0; i < items.Length; i++)
-            {
-                if (i < index) newItems[i] = items[i];
-                else if (i == index) continue;
-                else newItems[i - 1] = items[i];
-            }
-
-            items = newItems;
+            for (var i = index; i < Count - 1; i++) items[i] = items[i + 1];
+            Count--;
         }
         
         // returns true, if the given item can be found in the list, else false.
