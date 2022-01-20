@@ -27,10 +27,10 @@ namespace CustomerManagement
                         CreateCustomer(ref list);
                         break;
                     case "2":
-                        RemoveByName();
+                        RemoveByName(ref list);
                         break;
                     case "3":
-                        RemoveByIndex();
+                        RemoveByIndex(ref list);
                         break;
                     case "4":
                         ShowAllCustomers(ref list);
@@ -72,16 +72,39 @@ namespace CustomerManagement
 
         private static bool ValidateName(string input) => !string.IsNullOrEmpty(input) && !string.IsNullOrWhiteSpace(input);
 
-        private static void RemoveByName()
+        private static void RemoveByName(ref TurboList<Customer> list)
         {
-            throw new NotImplementedException();
+            var isValid = false;
+            Console.WriteLine("What is the the Customer's name?");
+            var input = Console.ReadLine();
+            isValid = ValidateName(input);
+            while (!isValid)
+            {
+                Console.WriteLine("Input invalid :)");
+                input = Console.ReadLine();
+                isValid = ValidateName(input);
+            }
+            foreach (var item in list)
+            {
+                if (item.Name == input) list.Remove(item);
+            }
         }
         
-        private static void RemoveByIndex()
+        private static void RemoveByIndex(ref TurboList<Customer> list)
         {
-            throw new NotImplementedException();
+            var isValid = false;
+            Console.WriteLine("What is the the Customer's name?");
+            var input = Console.ReadLine();
+            isValid = ValidateName(input);
+            while (!isValid)
+            {
+                Console.WriteLine("Input invalid :)");
+                input = Console.ReadLine();
+                isValid = ValidateName(input);
+            }
+            list.RemoveAt(Convert.ToInt32(input));
         }
-        
+
         private static void ShowAllCustomers(ref TurboList<Customer> list)
         {
             for (int i = 0; i < list.Count; i++)
