@@ -2,20 +2,13 @@ namespace CustomerManagement
 {
     public struct Customer
     {
-        private readonly int id;
-        private static int nextId;
 
-        public string FirstName => firstName;
-        private string firstName;
+        public string Name => name;
+        private string name;
 
-        public string LastName => lastName;
-        private string lastName;
-
-        public Customer(string firstName, string lastName)
+        public Customer(string name)
         {
-            id = nextId++;
-            this.firstName = firstName;
-            this.lastName = lastName;
+            this.name = name;
         }
     }
 }
