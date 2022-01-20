@@ -31,7 +31,13 @@ namespace TurboCollections
         public T Peek() => items[Count - 1];
 
         // returns the item on top of the stack and removes it at the same time.
-        // T Pop();
+        public T Pop()
+        {
+            var result = Peek();
+            items[--Count] = default(T);
+            return result;
+        }
+        
         // removes all items from the stack.
         // void Clear();
         // --------------- optional ---------------
