@@ -49,16 +49,7 @@ namespace TurboCollections
         }
         
         // returns true, if the given item can be found in the list, else false.
-        public bool Contains(T item)
-        {
-            var result = false;
-            foreach (var t in items)
-            {
-                result = t.Equals(item);
-                if (result) break;
-            }
-            return result;
-        }
+        public bool Contains(T item) => IndexOf(item) != -1;
         
         // returns the index of the given item if it is in the list, else -1.
         public int IndexOf(T item)
@@ -84,8 +75,10 @@ namespace TurboCollections
         // adds multiple items to this list at once.
         public void AddRange(IEnumerable<T> itemsToAdd)
         {
-            using var enumerator = itemsToAdd.GetEnumerator();
-            while (enumerator.MoveNext()) Add(enumerator.Current);
+            foreach (var item in itemsToAdd)
+            {
+                Add(item);
+            }
         }
         
         // gets the iterator for this collection. Used by IEnumerator to support foreach.
