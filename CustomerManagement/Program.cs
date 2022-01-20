@@ -33,7 +33,7 @@ namespace CustomerManagement
                         RemoveByIndex();
                         break;
                     case "4":
-                        ShowAllCustomers();
+                        ShowAllCustomers(ref list);
                         break;
                     default:
                         isDone = true;
@@ -82,9 +82,12 @@ namespace CustomerManagement
             throw new NotImplementedException();
         }
         
-        private static void ShowAllCustomers()
+        private static void ShowAllCustomers(ref TurboList<Customer> list)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < list.Count; i++)
+            {
+                Console.WriteLine($"{i}: {list.Get(i).Name}");
+            }
         }
 
         private static bool ValidateMenuInput(string? input)

@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace TurboCollections
 {
-    public class TurboList<T>
+    public class TurboList<T> : IEnumerable<T>
     {
         private T[] items;
         public static readonly int BufferSize = 4;
@@ -101,7 +102,41 @@ namespace TurboCollections
             Array.Resize(ref items, items.Length + BufferSize);
         }
         private bool IsIndexOutOfRange(int x) => (Length == 0 || x < 0 || x > Length - 1);
-        
+
+        public Enumerator GetEnumerator() => new Enumerator(items, Count); 
+
+        IEnumerator<T> IEnumerable<T>.GetEnumerator() => GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        public struct Enumerator : IEnumerator<T>
+        {
+            private readonly T[] _items;
+            private readonly int _count;
+            private int _index;
+
+            public Enumerator(T[] items, int count)
+            {
+                _items = items;
+                _count = count;
+                _index = -1;
+            }
+
+            public bool MoveNext()
+            {
+                if (_index >= _count) return false;
+                return ++_index < _count;
+            }
+
+            public void Reset() => _index = -1;
+
+            public T Current => _items[_index];
+
+            object IEnumerator.Current => Current;
+
+            public void Dispose() => Reset(); 
+        }
+
         public TurboList()
         {
             items = new T[BufferSize];
