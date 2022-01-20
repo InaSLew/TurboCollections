@@ -28,5 +28,14 @@ namespace TurboCollections.Test
             stack.Push(666);
             Assert.AreEqual(1, stack.Count);
         }
+
+        [Test]
+        public void PeekShouldGetLatestPush()
+        {
+            var stack = new TurboStack<int>();
+            stack.Push(66);
+            stack.Push(666);
+            Assert.AreEqual(666, stack.Peek());
+        }
     }
 }

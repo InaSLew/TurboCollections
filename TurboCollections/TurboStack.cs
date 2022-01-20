@@ -28,7 +28,8 @@ namespace TurboCollections
         }
 
         // returns the item on top of the stack without removing it.
-        // T Peek();
+        public T Peek() => items[Count - 1];
+
         // returns the item on top of the stack and removes it at the same time.
         // T Pop();
         // removes all items from the stack.
