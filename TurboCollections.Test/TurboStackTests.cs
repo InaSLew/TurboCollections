@@ -13,5 +13,12 @@ namespace TurboCollections.Test
             Console.WriteLine("HasEmptyConstructor fires");
             new TurboStack<int>();
         } 
+
+        [Test]
+        public void CountShouldReturn0RightAfterInitialization()
+        {
+            var stack = new TurboStack<int>();
+            Assert.Zero(stack.Count);
+        }
     }
 }
