@@ -20,5 +20,13 @@ namespace TurboCollections.Test
             var stack = new TurboStack<int>();
             Assert.Zero(stack.Count);
         }
+
+        [Test]
+        public void PushShouldIncrementCountBy1()
+        {
+            var stack = new TurboStack<int>();
+            stack.Push(666);
+            Assert.AreEqual(1, stack.Count);
+        }
     }
 }

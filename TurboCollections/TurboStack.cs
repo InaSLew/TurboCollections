@@ -1,4 +1,6 @@
 
+using System;
+
 namespace TurboCollections
 {
     public class TurboStack<T>
@@ -14,7 +16,17 @@ namespace TurboCollections
         public int Count { get; private set; }
 
         // adds one item on top of the stack.
-        // void Push(T item);
+        public void Push(T item)
+        {
+            EnsureCountWithinMax();
+            items[Count++] = item;
+        }
+
+        private void EnsureCountWithinMax()
+        {
+            if (Count + 1 >= MAX) throw new Exception("Stack is full");
+        }
+
         // returns the item on top of the stack without removing it.
         // T Peek();
         // returns the item on top of the stack and removes it at the same time.
