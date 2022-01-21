@@ -30,6 +30,19 @@ namespace TurboCollections.Test
         }
 
         [Test]
+        public void PushAfterPopShouldWork()
+        {
+            var stack = new TurboStack<int>();
+            stack.Push(666);
+            
+            var pop = stack.Pop();
+            stack.Push(777);
+
+            Assert.AreEqual(pop, 666);
+            Assert.AreEqual(1, stack.Count);
+        }
+
+        [Test]
         public void PeekShouldGetLatestPush()
         {
             var stack = new TurboStack<int>();
@@ -56,5 +69,6 @@ namespace TurboCollections.Test
             Assert.AreEqual(666, stack.Pop());
             Assert.AreEqual(1, stack.Count);
         }
+
     }
 }
