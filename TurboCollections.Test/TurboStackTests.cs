@@ -70,5 +70,17 @@ namespace TurboCollections.Test
             Assert.AreEqual(1, stack.Count);
         }
 
+        [Test]
+        public void ClearShouldReturnCountTo0()
+        {
+            var stack = new TurboStack<int>();
+            stack.Push(66);
+            stack.Push(666);
+            stack.Push(999);
+
+            stack.Clear();
+
+            Assert.Zero(stack.Count);
+        }
     }
 }

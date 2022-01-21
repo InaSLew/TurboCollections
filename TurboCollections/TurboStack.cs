@@ -38,7 +38,15 @@ namespace TurboCollections
         }
         
         // removes all items from the stack.
-        // void Clear();
+        public void Clear()
+        {
+            for (int i = 0; i < Count - 1; i++)
+            {
+                items[i] = default(T);
+            }
+            Count = default;
+        }
+        
         // --------------- optional ---------------
         // gets the iterator for this collection. Used by IEnumerable<T>-Interface to support foreach.
         // IEnumerator<T> IEnumerable<T>.GetEnumerator();
