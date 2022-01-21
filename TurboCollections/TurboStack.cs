@@ -23,23 +23,26 @@ namespace TurboCollections
 
         private void EnsureCountWithinMax()
         {
-            if (Count + 1 >= MAX) throw new Exception("Stack is full");
+            if (Count + 1 >= MAX) throw new StackOverflowException();
         }
 
         // returns the item on top of the stack without removing it.
-        public T Peek() => items[Count - 1];
+        public T Peek() => IsEmpty ? default(T) : items[Count - 1];
+
+        private bool IsEmpty => Count == 0;
 
         // returns the item on top of the stack and removes it at the same time.
         public T Pop()
         {
             var result = Peek();
-            items[--Count] = default(T);
+            if (!IsEmpty) items[--Count] = default(T);
             return result;
         }
         
         // removes all items from the stack.
         public void Clear()
         {
+            if (IsEmpty) return;
             for (int i = 0; i < Count - 1; i++)
             {
                 items[i] = default(T);

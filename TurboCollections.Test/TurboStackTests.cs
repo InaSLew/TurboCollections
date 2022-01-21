@@ -52,6 +52,13 @@ namespace TurboCollections.Test
         }
 
         [Test]
+        public void PeekEmptyShouldReturnDefault()
+        {
+            var stack = new TurboStack<int>();
+            Assert.AreEqual(default(int), stack.Peek());
+        }
+
+        [Test]
         public void PopShouldReturnLatestPush()
         {
             var stack = new TurboStack<int>();
